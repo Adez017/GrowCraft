@@ -1,22 +1,14 @@
-/**
- * Enhanced Contact Form JavaScript - Redesigned
- * Modern, clean implementation with all original functionality
- */
-
-// Wait for DOM to be fully loaded
+// Enhanced Contact Form JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeFileUpload();
     initializeQuickContact();
     initializeBackToTop();
     initializeDateValidation();
-    initializePhoneInput();
-    initializeFormAnimations();
 });
 
 // Global variables
 let uploadedFiles = [];
-let phoneInput = null;
 
 // Initialize the main contact form
 function initializeContactForm() {
@@ -27,84 +19,6 @@ function initializeContactForm() {
         e.preventDefault();
         handleFormSubmission();
     });
-
-    // Add real-time validation
-    addRealTimeValidation();
-}
-
-// Add real-time form validation
-function addRealTimeValidation() {
-    const requiredFields = document.querySelectorAll('[required]');
-    
-    requiredFields.forEach(field => {
-        field.addEventListener('blur', function() {
-            validateField(this);
-        });
-        
-        field.addEventListener('input', function() {
-            if (this.classList.contains('is-invalid')) {
-                validateField(this);
-            }
-        });
-    });
-}
-
-// Validate individual field
-function validateField(field) {
-    const value = field.value.trim();
-    const fieldType = field.type;
-    let isValid = true;
-    let errorMessage = '';
-
-    // Remove existing validation classes
-    field.classList.remove('is-valid', 'is-invalid');
-
-    if (field.hasAttribute('required') && !value) {
-        isValid = false;
-        errorMessage = `${getFieldLabel(field)} is required`;
-    } else if (fieldType === 'email' && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-            isValid = false;
-            errorMessage = 'Please enter a valid email address';
-        }
-    } else if (field.id === 'message' && value && value.length < 10) {
-        isValid = false;
-        errorMessage = 'Message should be at least 10 characters long';
-    }
-
-    // Apply validation styling
-    if (value) { // Only show validation if field has content
-        field.classList.add(isValid ? 'is-valid' : 'is-invalid');
-        
-        // Update or create feedback element
-        updateFieldFeedback(field, errorMessage, isValid);
-    }
-
-    return isValid;
-}
-
-// Get field label text
-function getFieldLabel(field) {
-    const label = document.querySelector(`label[for="${field.id}"]`);
-    return label ? label.textContent.replace(' *', '') : 'This field';
-}
-
-// Update field feedback
-function updateFieldFeedback(field, message, isValid) {
-    let feedback = field.parentNode.querySelector('.invalid-feedback, .valid-feedback');
-    
-    if (!feedback) {
-        feedback = document.createElement('div');
-        field.parentNode.appendChild(feedback);
-    }
-    
-    feedback.className = isValid ? 'valid-feedback' : 'invalid-feedback';
-    feedback.textContent = isValid ? 'Looks good!' : message;
-    feedback.style.display = 'block';
-    feedback.style.fontSize = '0.875rem';
-    feedback.style.marginTop = '0.25rem';
-    feedback.style.color = isValid ? '#16a34a' : '#dc2626';
 }
 
 // Handle form submission
@@ -117,18 +31,11 @@ function handleFormSubmission() {
 
     showLoadingState();
     
-    // Simulate API call (replace with actual submission)
+    // Simulate form submission (replace with actual API call)
     setTimeout(() => {
         hideLoadingState();
         showSuccessMessage('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.');
         resetForm();
-        
-        // Track form submission (if analytics is available)
-        trackFormInteraction('form_submit', {
-            service: formData.serviceType,
-            budget: formData.budget,
-            files_count: formData.files.length
-        });
     }, 2000);
 }
 
@@ -150,13 +57,13 @@ function collectFormData() {
     };
 }
 
-// Validate complete form
+// Validate form data
 function validateForm(data) {
     const errors = [];
 
     // Required field validation
-    if (!data.name) errors.push('Full name is required');
-    if (!data.email) errors.push('Email address is required');
+    if (!data.name) errors.push('Name is required');
+    if (!data.email) errors.push('Email is required');
     if (!data.serviceType) errors.push('Please select a service type');
     if (!data.message) errors.push('Project details are required');
 
@@ -167,8 +74,9 @@ function validateForm(data) {
     }
 
     // Phone validation (if provided)
-    if (data.phone && phoneInput) {
-        if (!phoneInput.isValidNumber()) {
+    if (data.phone) {
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
             errors.push('Please enter a valid phone number');
         }
     }
@@ -178,40 +86,13 @@ function validateForm(data) {
         errors.push('Project details should be at least 10 characters long');
     }
 
-    // File size validation
-    const oversizedFiles = uploadedFiles.filter(file => file.size > 10 * 1024 * 1024);
-    if (oversizedFiles.length > 0) {
-        errors.push(`Files too large: ${oversizedFiles.map(f => f.name).join(', ')}`);
-    }
-
     if (errors.length > 0) {
-        showErrorMessage(errors.join('<br>'));
+        showErrorMessage(errors.join('. '));
         return false;
     }
 
     clearMessages();
     return true;
-}
-
-// Initialize phone input with international format
-function initializePhoneInput() {
-    const phoneField = document.getElementById('phone');
-    if (!phoneField || typeof window.intlTelInput !== 'function') return;
-
-    try {
-        phoneInput = window.intlTelInput(phoneField, {
-            initialCountry: 'in',
-            separateDialCode: true,
-            preferredCountries: ['in', 'us', 'gb'],
-            utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js'
-        });
-
-        phoneField.addEventListener('countrychange', function() {
-            validateField(this);
-        });
-    } catch (error) {
-        console.warn('Phone input initialization failed:', error);
-    }
 }
 
 // File upload functionality
@@ -228,44 +109,27 @@ function initializeFileUpload() {
         e.target.value = ''; // Reset input
     });
 
-    // Prevent default drag behaviors
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        fileUploadArea.addEventListener(eventName, preventDefaults, false);
-        document.body.addEventListener(eventName, preventDefaults, false);
-    });
-
-    // Highlight drop area when item is dragged over it
-    ['dragenter', 'dragover'].forEach(eventName => {
-        fileUploadArea.addEventListener(eventName, highlight, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        fileUploadArea.addEventListener(eventName, unhighlight, false);
-    });
-
-    // Handle dropped files
-    fileUploadArea.addEventListener('drop', handleDrop, false);
-
-    function preventDefaults(e) {
+    // Handle drag and drop
+    fileUploadArea.addEventListener('dragover', function(e) {
         e.preventDefault();
-        e.stopPropagation();
-    }
+        fileUploadArea.style.borderColor = '#0078FF';
+        fileUploadArea.style.backgroundColor = '#f0f8ff';
+    });
 
-    function highlight() {
-        fileUploadArea.style.borderColor = 'var(--primary-color)';
-        fileUploadArea.style.backgroundColor = 'rgba(0, 120, 255, 0.02)';
-    }
+    fileUploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        fileUploadArea.style.borderColor = '#ddd';
+        fileUploadArea.style.backgroundColor = '#fafafa';
+    });
 
-    function unhighlight() {
-        fileUploadArea.style.borderColor = 'var(--border-color)';
-        fileUploadArea.style.backgroundColor = 'var(--bg-primary)';
-    }
-
-    function handleDrop(e) {
-        const dt = e.dataTransfer;
-        const files = Array.from(dt.files);
+    fileUploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        fileUploadArea.style.borderColor = '#ddd';
+        fileUploadArea.style.backgroundColor = '#fafafa';
+        
+        const files = Array.from(e.dataTransfer.files);
         handleFileSelection(files);
-    }
+    });
 }
 
 // Handle file selection
@@ -299,7 +163,6 @@ function handleFileSelection(files) {
             return;
         }
 
-        // Add file to array and display
         uploadedFiles.push(file);
         displayFile(file);
     });
@@ -312,27 +175,12 @@ function displayFile(file) {
     fileItem.className = 'file-item';
     fileItem.dataset.fileName = file.name;
     
-    const fileIcon = getFileIcon(file.type);
-    
     fileItem.innerHTML = `
-        <div class="d-flex align-items-center">
-            <i class="${fileIcon} me-2"></i>
-            <span>${file.name} (${formatFileSize(file.size)})</span>
-        </div>
-        <span class="file-remove" onclick="removeFile('${file.name}')" title="Remove file">
-            <i class="fas fa-times"></i>
-        </span>
+        <span>${file.name} (${formatFileSize(file.size)})</span>
+        <span class="file-remove" onclick="removeFile('${file.name}')">&times;</span>
     `;
     
     fileList.appendChild(fileItem);
-}
-
-// Get appropriate icon for file type
-function getFileIcon(fileType) {
-    if (fileType.includes('pdf')) return 'fas fa-file-pdf text-danger';
-    if (fileType.includes('word') || fileType.includes('document')) return 'fas fa-file-word text-primary';
-    if (fileType.includes('image')) return 'fas fa-file-image text-info';
-    return 'fas fa-file text-secondary';
 }
 
 // Remove uploaded file
@@ -341,12 +189,11 @@ function removeFile(fileName) {
     
     const fileItem = document.querySelector(`[data-file-name="${fileName}"]`);
     if (fileItem) {
-        fileItem.style.animation = 'slideOut 0.3s ease-out';
-        setTimeout(() => fileItem.remove(), 300);
+        fileItem.remove();
     }
 }
 
-// Format file size for display
+// Format file size
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -362,22 +209,20 @@ function initializeQuickContact() {
     const callBtn = document.getElementById('call-quick');
 
     if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        whatsappBtn.addEventListener('click', function() {
             openWhatsApp();
         });
     }
 
     if (telegramBtn) {
-        telegramBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        telegramBtn.addEventListener('click', function() {
             openTelegram();
         });
     }
 
     if (callBtn) {
         callBtn.addEventListener('click', function() {
-            trackFormInteraction('quick_call', { source: 'contact_page' });
+            window.open('tel:+919999999999', '_self');
         });
     }
 }
@@ -401,13 +246,10 @@ function openWhatsApp() {
     
     whatsappMessage += `\n\nI found you through your website.`;
     
-    const phoneNumber = "919999999999"; // Replace with actual WhatsApp business number
+    // Replace with your actual WhatsApp business number
+    const phoneNumber = "919999999999";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(whatsappUrl, '_blank');
-    
-    trackFormInteraction('whatsapp_click', { 
-        has_form_data: !!(name || service || message) 
-    });
 }
 
 // Open Telegram chat
@@ -424,13 +266,10 @@ function openTelegram() {
     
     telegramMessage += `. I'd like to discuss my project with you.`;
     
-    const telegramUsername = "growcraft_support"; // Replace with actual Telegram username
+    // Replace with your actual Telegram username or bot
+    const telegramUsername = "growcraft_support"; // Replace with your Telegram username
     const telegramUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(telegramMessage)}`;
     window.open(telegramUrl, '_blank');
-    
-    trackFormInteraction('telegram_click', { 
-        has_form_data: !!(name || service) 
-    });
 }
 
 // Initialize date validation
@@ -460,9 +299,6 @@ function initializeDateValidation() {
         
         // Update available time slots based on selected date
         updateTimeSlots(selectedDate);
-        
-        // Clear any previous error messages
-        setTimeout(clearMessages, 3000);
     });
 }
 
@@ -471,14 +307,13 @@ function updateTimeSlots(selectedDate) {
     const timeSelect = document.getElementById('preferred-time');
     if (!timeSelect) return;
 
+    // For demo purposes, we'll assume all time slots are available
+    // In a real application, you would fetch available slots from your backend
     const now = new Date();
     const isToday = selectedDate.toDateString() === now.toDateString();
     
     Array.from(timeSelect.options).forEach((option, index) => {
         if (index === 0) return; // Skip the first "Select time slot" option
-        
-        option.disabled = false;
-        option.textContent = option.textContent.replace(' (Past)', '');
         
         if (isToday) {
             const optionTime = option.value;
@@ -490,36 +325,13 @@ function updateTimeSlots(selectedDate) {
             if (optionDateTime <= now) {
                 option.disabled = true;
                 option.textContent += ' (Past)';
+            } else {
+                option.disabled = false;
+                option.textContent = option.textContent.replace(' (Past)', '');
             }
-        }
-    });
-}
-
-// Initialize form animations
-function initializeFormAnimations() {
-    // Add stagger animation to form sections
-    const formSections = document.querySelectorAll('.form-section');
-    formSections.forEach((section, index) => {
-        section.style.animationDelay = `${index * 0.1}s`;
-        section.classList.add('fade-in');
-    });
-
-    // Add floating label effect
-    const formControls = document.querySelectorAll('.form-control, .form-select');
-    formControls.forEach(control => {
-        control.addEventListener('focus', function() {
-            this.parentNode.classList.add('focused');
-        });
-        
-        control.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentNode.classList.remove('focused');
-            }
-        });
-        
-        // Check if field has value on load
-        if (control.value) {
-            control.parentNode.classList.add('focused');
+        } else {
+            option.disabled = false;
+            option.textContent = option.textContent.replace(' (Past)', '');
         }
     });
 }
@@ -530,17 +342,19 @@ function showErrorMessage(message) {
     const successElement = document.getElementById('success-message');
     
     if (errorElement) {
-        errorElement.innerHTML = message;
+        errorElement.textContent = message;
         errorElement.style.display = 'block';
-        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
     if (successElement) {
         successElement.style.display = 'none';
     }
     
-    // Auto-hide after 8 seconds
-    setTimeout(clearMessages, 8000);
+    // Scroll to messages
+    document.getElementById('form-messages')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Auto-hide after 5 seconds
+    setTimeout(clearMessages, 5000);
 }
 
 function showSuccessMessage(message) {
@@ -548,14 +362,16 @@ function showSuccessMessage(message) {
     const successElement = document.getElementById('success-message');
     
     if (successElement) {
-        successElement.innerHTML = message;
+        successElement.textContent = message;
         successElement.style.display = 'block';
-        successElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
     if (errorElement) {
         errorElement.style.display = 'none';
     }
+    
+    // Scroll to messages
+    document.getElementById('form-messages')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function clearMessages() {
@@ -564,12 +380,12 @@ function clearMessages() {
     
     if (errorElement) {
         errorElement.style.display = 'none';
-        errorElement.innerHTML = '';
+        errorElement.textContent = '';
     }
     
     if (successElement) {
         successElement.style.display = 'none';
-        successElement.innerHTML = '';
+        successElement.textContent = '';
     }
 }
 
@@ -579,11 +395,11 @@ function showLoadingState() {
     if (submitBtn) {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        
-        const originalContent = submitBtn.innerHTML;
-        submitBtn.dataset.originalContent = originalContent;
         submitBtn.innerHTML = `
-            <i class="fas fa-spinner fa-spin me-2"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+            </svg>
             Sending...
         `;
     }
@@ -594,34 +410,22 @@ function hideLoadingState() {
     if (submitBtn) {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
-        
-        if (submitBtn.dataset.originalContent) {
-            submitBtn.innerHTML = submitBtn.dataset.originalContent;
-        } else {
-            submitBtn.innerHTML = `
-                <i class="fas fa-paper-plane me-2"></i>
-                Send Message
-            `;
-        }
+        submitBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+            </svg>
+            Send Message
+        `;
     }
 }
 
-// Reset form to initial state
+// Reset form
 function resetForm() {
     const form = document.getElementById('enhanced-contact-form');
     if (form) {
         form.reset();
     }
-    
-    // Clear validation classes
-    document.querySelectorAll('.is-valid, .is-invalid').forEach(field => {
-        field.classList.remove('is-valid', 'is-invalid');
-    });
-    
-    // Clear feedback elements
-    document.querySelectorAll('.valid-feedback, .invalid-feedback').forEach(feedback => {
-        feedback.remove();
-    });
     
     // Clear uploaded files
     uploadedFiles = [];
@@ -635,11 +439,6 @@ function resetForm() {
     if (dateInput) {
         const today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute('min', today);
-    }
-    
-    // Reset phone input
-    if (phoneInput) {
-        phoneInput.setNumber('');
     }
 }
 
@@ -663,63 +462,31 @@ function initializeBackToTop() {
             top: 0,
             behavior: 'smooth'
         });
-        
-        trackFormInteraction('back_to_top', {});
     });
 }
 
-// Analytics tracking function
+// Utility function to format time for display
+function formatTime(time24) {
+    const [hours, minutes] = time24.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minutes} ${ampm}`;
+}
+
+// Analytics tracking (optional)
 function trackFormInteraction(action, data = {}) {
     // Implement your analytics tracking here
     console.log('Form interaction:', action, data);
     
-    // Example implementations:
-    
-    // Google Analytics 4
-    if (typeof gtag !== 'undefined') {
-        gtag('event', action, {
-            event_category: 'Contact Form',
-            event_label: data.label || '',
-            value: data.value || 0,
-            ...data
-        });
-    }
-    
-    // Facebook Pixel
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Contact', data);
-    }
-    
-    // Custom analytics
-    if (window.customAnalytics) {
-        window.customAnalytics.track(action, data);
-    }
-}
-
-// Utility functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
+    // Example: Google Analytics
+    // if (typeof gtag !== 'undefined') {
+    //     gtag('event', action, {
+    //         event_category: 'Contact Form',
+    //         event_label: data.label || '',
+    //         value: data.value || 0
+    //     });
+    // }
 }
 
 // Export functions for testing or external use
@@ -730,51 +497,6 @@ window.ContactForm = {
     formatFileSize,
     showErrorMessage,
     showSuccessMessage,
-    clearMessages,
-    validateField,
-    collectFormData,
-    trackFormInteraction
+    clearMessages
 };
 
-// Handle page visibility change
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-        // Re-validate date/time fields when user returns to tab
-        const dateInput = document.getElementById('preferred-date');
-        if (dateInput && dateInput.value) {
-            updateTimeSlots(new Date(dateInput.value));
-        }
-    }
-});
-
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideOut {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-    }
-    
-    .focused .form-label {
-        color: var(--primary-color);
-        transform: translateY(-2px);
-        transition: all 0.3s ease;
-    }
-    
-    .is-invalid {
-        border-color: #dc2626 !important;
-        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
-    }
-    
-    .is-valid {
-        border-color: #16a34a !important;
-        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
-    }
-`;
-document.head.appendChild(style);
