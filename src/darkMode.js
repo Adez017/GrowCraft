@@ -11,11 +11,11 @@ class DarkModeToggle {
     }
 
     init() {
-        // Apply saved theme on page load
-        this.applyTheme();
-
         // Create and insert toggle button
         this.createToggle();
+
+        // Apply saved theme on page load
+        this.applyTheme();
 
         // Add transition styles
         this.addTransitionStyles();
@@ -70,6 +70,11 @@ class DarkModeToggle {
             document.documentElement.classList.remove('dark');
             document.body.classList.remove('dark-mode');
         }
+
+           // Update toggle button icon state
+        if (this.toggleElement) {
+            this.toggleElement.classList.toggle('active', this.theme === 'dark');
+        }
         
         // Update logo based on theme
         this.updateLogo();
@@ -89,34 +94,28 @@ class DarkModeToggle {
         this.updateLogo();
     }
     
+    // --- NEW AND IMPROVED METHOD ---
     updateLogo() {
-        const logo = document.querySelector("#logo");
-        if (logo) {
-            // Determine the correct path based on current page location
-            let darkLogoPath, lightLogoPath;
-            
-            // Check if we're in the src folder (contact page) or root (home page)
-            if (window.location.pathname.includes('/src/')) {
-                // We're in src folder, use relative path
-                darkLogoPath = 'images/logo-transparent-dark-mode.png';
-                lightLogoPath = 'images/logo_bg_transparent.png';
-            } else {
-                // We're in root folder, use root path
-                darkLogoPath = 'images/logo-transparent-dark-mode.png';
-                lightLogoPath = 'images/logo_bg_transparent.png';
-            }
-            
-            console.log('Updating logo:', this.theme, 'Dark path:', darkLogoPath, 'Light path:', lightLogoPath);
-            
-            if (this.theme === 'dark') {
-                logo.src = darkLogoPath;
-                console.log('Logo updated to dark mode:', logo.src);
-            } else {
-                logo.src = lightLogoPath;
-                console.log('Logo updated to light mode:', logo.src);
-            }
+        // Select ALL logos that are theme-aware
+        const logos = document.querySelectorAll(".theme-aware-logo");
+
+        if (logos.length > 0) {
+            logos.forEach(logo => {
+                if (this.theme === 'dark') {
+                    // Get the dark mode image path from the data attribute
+                    if (logo.dataset.darkSrc) {
+                        logo.src = logo.dataset.darkSrc;
+                    }
+                } else {
+                    // Get the light mode image path from the data attribute
+                    if (logo.dataset.lightSrc) {
+                        logo.src = logo.dataset.lightSrc;
+                    }
+                }
+            });
         } else {
-            console.log('Logo element not found');
+            // This message is helpful for debugging if the class name is wrong
+            console.log('No ".theme-aware-logo" elements found.');
         }
     }
 
@@ -134,22 +133,44 @@ class DarkModeToggle {
             }
             
             .theme-toggle {
-                background: none;
-                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(0, 0, 0, 0.1);
                 cursor: pointer;
-                padding: 8px;
+                padding: 10px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 transition: all 0.3s ease;
-                color: var(--text-color, #333);
-                background-color: var(--bg-color, transparent);
+                color: #333;
+                width: 40px;
+                height: 40px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
             
             .theme-toggle:hover {
-                background-color: var(--hover-bg, rgba(0,0,0,0.1));
+                background-color: rgba(76, 175, 80, 0.1);
+                border-color: #4caf50;
+                color: #4caf50;
                 transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+            }
+            
+            /* Dark mode theme toggle */
+            .dark .theme-toggle,
+            .dark-mode .theme-toggle {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #ffffff;
+            }
+            
+            .dark .theme-toggle:hover,
+            .dark-mode .theme-toggle:hover {
+                background: rgba(76, 175, 80, 0.2);
+                border-color: #4caf50;
+                color: #4caf50;
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
             }
             
             .theme-toggle svg {
@@ -1564,4 +1585,3 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = DarkModeToggle;
 } 
 
-localStorage.removeItem('theme');
