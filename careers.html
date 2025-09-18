@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers - GrowCraft</title>
+  <link rel="stylesheet" href="src/css/style.css" />
+  <link rel="shortcut icon" href="Favicon.ico" type="image/x-icon" />
+
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: #333;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #f7fafc;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+    }
+
+    .col-lg-4, .col-md-6, .col-lg-8 {
+      padding: 0 15px;
+      margin-bottom: 30px;
+    }
+
+    .col-lg-4 {
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+
+    .col-md-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    .col-lg-8 {
+      flex: 0 0 66.666667%;
+      max-width: 66.666667%;
+    }
+
+    .justify-content-center {
+      justify-content: center;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar-nav .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    body.dark-mode .navbar-nav .nav-link {
+      color: #f7fafc;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .navbar-nav .nav-link.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #666;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    body.dark-mode .hero-subtitle {
+      color: #a8b2d1;
+    }
+
+    /* Career Cards */
+    .career-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      height: 100%;
+      text-align: center;
+    }
+
+    body.dark-mode .career-card {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .career-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+    }
+
+    body.dark-mode .career-card:hover {
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .career-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .career-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    body.dark-mode .career-title {
+      color: #f7fafc;
+    }
+
+    .career-description {
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    body.dark-mode .career-description {
+      color: #a8b2d1;
+    }
+
+    /* Values Section */
+    .values-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* No Openings Section */
+    .no-openings {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+
+    body.dark-mode .no-openings {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .no-openings-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 3rem;
+      color: white;
+    }
+
+    .no-openings-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    body.dark-mode .no-openings-title {
+      color: #f7fafc;
+    }
+
+    .no-openings-text {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    body.dark-mode .no-openings-text {
+      color: #a8b2d1;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .col-lg-4, .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      
+      .navbar-nav {
+        display: none;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .career-card {
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .no-openings {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-section {
+        padding: 120px 0 60px;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .career-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Simple icons using CSS */
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      stroke-width: 0;
+      stroke: currentColor;
+      fill: currentColor;
+    }
+
+    .icon-rocket:before { content: "🚀"; }
+    .icon-users:before { content: "👥"; }
+    .icon-chart:before { content: "📈"; }
+    .icon-heart:before { content: "💝"; }
+    .icon-globe:before { content: "🌍"; }
+    .icon-trophy:before { content: "🏆"; }
+    .icon-hourglass:before { content: "⏳"; }
+    .icon-envelope:before { content: "✉️"; }
+
+    /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/Logo_new.png" alt="GrowCraft" class="theme-aware-logo"
+             data-light-src="images/Logo_new.png" data-dark-src="images/Logo.png">
+      </a>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="services.html">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blogListing.html">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html#about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="careers.html">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="src/contact.html">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="hero-title fade-in">Join Our Growing Team</h1>
+          <p class="hero-subtitle fade-in">
+            Be part of a dynamic team that's passionate about empowering businesses with innovative digital solutions and creative excellence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Work With Us Section -->
+  <section class="values-section">
+    <div class="container">
+      <h2 class="section-title fade-in">Why Work With GrowCraft?</h2>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-rocket">🚀</span>
+            </div>
+            <h3 class="career-title">Innovation First</h3>
+            <p class="career-description">
+              Work with cutting-edge technologies and innovative solutions that push the boundaries of digital excellence.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-users">👥</span>
+            </div>
+            <h3 class="career-title">Collaborative Culture</h3>
+            <p class="career-description">
+              Join a team that values collaboration, creativity, and mutual support in achieving exceptional results.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-chart">📈</span>
+            </div>
+            <h3 class="career-title">Growth Opportunities</h3>
+            <p class="career-description">
+              Accelerate your career with continuous learning opportunities and professional development programs.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-heart">💝</span>
+            </div>
+            <h3 class="career-title">Work-Life Balance</h3>
+            <p class="career-description">
+              Enjoy flexible working arrangements that help you maintain a healthy balance between work and personal life.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-globe">🌍</span>
+            </div>
+            <h3 class="career-title">Global Impact</h3>
+            <p class="career-description">
+              Contribute to projects that make a real difference for businesses around the world.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="career-card fade-in">
+            <div class="career-icon">
+              <span class="icon-trophy">🏆</span>
+            </div>
+            <h3 class="career-title">Recognition & Rewards</h3>
+            <p class="career-description">
+              Be recognized and rewarded for your contributions with competitive compensation and benefits.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Openings Section -->
+  <section class="container">
+    <div class="no-openings fade-in">
+      <div class="no-openings-icon">
+        <span class="icon-hourglass">⏳</span>
+      </div>
+      <h2 class="no-openings-title">No Current Openings</h2>
+      <p class="no-openings-text">
+        We currently don't have any open positions, but we're always looking for talented individuals to join our team. 
+        If you're passionate about digital innovation and would like to be considered for future opportunities, 
+        we'd love to hear from you!
+      </p>
+      <a href="src/contact.html" class="cta-button">
+        <span class="icon-envelope">✉️</span> Send Your Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="src/darkMode.js"></script>
+  <script>
+    // Load footer component
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+
+    // Initialize fade-in animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+
+</html>
