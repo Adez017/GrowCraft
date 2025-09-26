@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers - GrowCraft</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="Favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="src/style.css" />
+
+  <style>
+    /* Modern CSS Variables */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      --card-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.12);
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark mode variables */
+    [data-bs-theme="dark"] {
+      --primary-gradient: linear-gradient(135deg, #4c63d2 0%, #5a4fcf 100%);
+      --secondary-gradient: linear-gradient(135deg, #d946ef 0%, #f43f5e 100%);
+      --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.4);
+      --text-primary: #f7fafc;
+      --text-secondary: #e2e8f0;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: var(--transition);
+    }
+
+    [data-bs-theme="dark"] body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    /* Enhanced Navbar Design */
+    .navbar {
+      padding: 1rem 0;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+      border-bottom: 3px solid #388e3c;
+      box-shadow: 0 8px 32px rgba(56, 142, 60, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand img {
+      max-height: 55px;
+      object-fit: contain;
+      vertical-align: middle;
+      filter: drop-shadow(2px 2px 4px rgba(56, 142, 60, 0.2));
+      transition: filter 0.3s ease;
+    }
+
+    .navbar-nav .nav-link {
+      position: relative;
+      font-weight: 600;
+      color: #2e7d32 !important;
+      font-family: "Poppins", sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.25rem !important;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      background: transparent;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffffff !important;
+      background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(56, 142, 60, 0.3);
+    }
+
+    .navbar-nav .nav-link.active {
+      color: #ffffff !important;
+      background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+      box-shadow: 0 4px 15px rgba(56, 142, 60, 0.25);
+    }
+
+    /* Careers Hero Section */
+    .careers-hero {
+      background: var(--primary-gradient);
+      padding: 120px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .careers-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Careers Content */
+    .careers-content {
+      padding: 80px 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    [data-bs-theme="dark"] .careers-content {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .careers-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    [data-bs-theme="dark"] .careers-card {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .careers-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .careers-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .no-openings-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border: 2px dashed #dee2e6;
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    [data-bs-theme="dark"] .no-openings-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-color: #475569;
+    }
+
+    .no-openings-icon {
+      font-size: 4rem;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+    }
+
+    [data-bs-theme="dark"] .no-openings-icon {
+      color: #94a3b8;
+    }
+
+    .future-opportunities {
+      background: var(--success-gradient);
+      color: white;
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .future-opportunities h3 {
+      margin-bottom: 1rem;
+    }
+
+    .contact-cta {
+      background: var(--accent-gradient);
+      color: white;
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .btn-outline-primary {
+      border: 2px solid white;
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-outline-primary:hover {
+      background: white;
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Search Enhancement */
+    .search-container {
+      position: relative;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      border: 2px solid transparent;
+      border-radius: 50px;
+      padding: 2px;
+      box-shadow: 0 4px 15px rgba(56, 142, 60, 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .search-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #388e3c, #2e7d32);
+      border-radius: inherit;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    .search-container:focus-within::before {
+      opacity: 1;
+    }
+
+    .search-container:focus-within {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(56, 142, 60, 0.2);
+    }
+
+    .search-input {
+      background: transparent;
+      border: none;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      color: #2e7d32;
+      outline: none;
+      width: 250px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .search-input::placeholder {
+      color: #81c784;
+      font-weight: 500;
+    }
+
+    .search-container:focus-within .search-input {
+      color: #ffffff;
+    }
+
+    .search-container:focus-within .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .search-button {
+      background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(56, 142, 60, 0.2);
+    }
+
+    .search-button:hover {
+      background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+      transform: scale(1.05);
+    }
+
+    /* Dark Mode Theme Toggle Button Enhancement */
+    .dark-mode .theme-toggle,
+    .dark .theme-toggle {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 50% !important;
+      padding: 10px !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .dark-mode .theme-toggle:hover,
+    .dark .theme-toggle:hover {
+      background: rgba(76, 175, 80, 0.2) !important;
+      border-color: #4caf50 !important;
+      color: #4caf50 !important;
+      transform: scale(1.1) !important;
+    }
+
+    /* Mobile Dark Mode Navbar */
+    @media (max-width: 991px) {
+      .dark-mode .navbar-collapse,
+      .dark .navbar-collapse {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border-radius: 15px !important;
+        margin-top: 15px !important;
+        padding: 20px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .dark-mode .search-container,
+      .dark .search-container {
+        background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 100%) !important;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .careers-card {
+        padding: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .search-input {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body id="main-body">
+  <!-- Navbar starts here -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid d-flex justify-content-between align-items-center px-2 px-sm-5">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo_bg_transparent.png" alt="GrowCraft" width="200" 
+             class="theme-aware-logo"
+             data-light-src="images/logo_bg_transparent.png"
+             data-dark-src="images/logo-transparent-dark-mode.png" />
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="blogListing.html">Blogs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="work.html">Our Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="src/contact.html">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-input" />
+        <button class="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar ends here -->
+
+  <!-- Careers Hero Section -->
+  <section class="careers-hero">
+    <div class="container">
+      <h1 class="hero-title">Join Our Team</h1>
+      <p class="hero-subtitle">
+        Be part of the GrowCraft journey and help us empower businesses with innovative digital solutions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Careers Content -->
+  <section class="careers-content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          
+          <!-- Current Status -->
+          <div class="careers-card">
+            <h2 class="section-title">Current Opportunities</h2>
+            <p class="careers-text">
+              At GrowCraft, we're always looking for talented individuals who share our passion for digital innovation and creative excellence.
+            </p>
+
+            <!-- No Openings Card -->
+            <div class="no-openings-card">
+              <div class="no-openings-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3>No Current Openings</h3>
+              <p class="mb-0">
+                We don't have any open positions at the moment, but we're always growing and expanding our team. 
+                Check back soon or reach out to us directly if you'd like to be considered for future opportunities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Future Opportunities -->
+          <div class="future-opportunities">
+            <h3><i class="fas fa-rocket me-2"></i>Future Opportunities</h3>
+            <p class="mb-3">
+              We're continuously evolving and looking for passionate professionals in these areas:
+            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="fas fa-code me-2"></i>Web Development</li>
+                  <li class="mb-2"><i class="fas fa-paint-brush me-2"></i>Graphic Design</li>
+                  <li class="mb-2"><i class="fas fa-bullhorn me-2"></i>Digital Marketing</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="fas fa-pen-nib me-2"></i>Content Writing</li>
+                  <li class="mb-2"><i class="fas fa-hashtag me-2"></i>Social Media Management</li>
+                  <li class="mb-2"><i class="fas fa-shield-alt me-2"></i>Cybersecurity Analysis</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- What We Offer -->
+          <div class="careers-card">
+            <h2 class="section-title">What We Offer</h2>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="text-center">
+                  <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                  <h5>Collaborative Environment</h5>
+                  <p>Work with a diverse team of creative professionals who value innovation and teamwork.</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="text-center">
+                  <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                  <h5>Growth Opportunities</h5>
+                  <p>Advance your career with training programs, mentorship, and real-world project experience.</p>
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="text-center">
+                  <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
+                  <h5>Creative Freedom</h5>
+                  <p>Express your creativity while working on diverse projects across multiple industries.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact CTA -->
+          <div class="contact-cta">
+            <h3>Interested in Joining Us?</h3>
+            <p class="mb-4">
+              Even though we don't have current openings, we'd love to hear from talented individuals. 
+              Send us your resume and we'll keep you in mind for future opportunities.
+            </p>
+            <a href="src/contact.html" class="btn-outline-primary">
+              <i class="fas fa-envelope me-2"></i>Get In Touch
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Footer -->
+  <footer class="professional-footer fade-in">
+    <div class="container">
+        <div class="row g-4 py-4 fade-in">
+            <!-- Footer Columns --><div class="col-lg-4 col-md-6 fade-in">
+                <div class="footer-brand fade-in">
+                    <img 
+                      src="images/Logo_new.png" 
+                      alt="GrowCraft Logo" 
+                      class="footer-logo mb-3 theme-aware-logo"
+                      data-light-src="images/Logo_new.png"
+                      data-dark-src="images/Logo.png" 
+                    />
+                    <h4 class="brand-name">GrowCraft</h4>
+                    <p class="brand-description">Empowering businesses with
+                        innovative digital solutions and creative excellence.</p>
+                    <div class="quick-stats fade-in">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Clients</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Section -->
+            <div class="col-lg-2 col-md-4 col-6">
+                <h5 class="footer-title">
+                    <i class="fas fa-tools" style="margin-right: 8px;"></i>Services
+                </h5>
+                <ul class="footer-links">
+                    <li><a href="learn/webdev.html">Web Development</a></li>
+                    <li><a href="learn/graphic.html">Graphic Design</a></li>
+                    <li><a href="src/digital-marketing.html">Digital Marketing</a></li>
+                    <li><a href="learn/contentwriting.html">Content Writing</a></li>
+                    <li><a href="learn/socialmedia.html">Social Media</a></li>
+                    <li><a href="learn/cyberanalyst.html">Cyber Analyst</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-3 col-6 fade-in">
+                <h5 class="footer-title">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="work.html">Portfolio</a></li>
+                    <li><a href="src/contact.html">Contact</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="blogListing.html">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-4 col-md-6 fade-in">
+                <h5 class="footer-title">Get In Touch</h5>
+                <div class="contact-info mb-3 fade-in">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:info@growcraft.com">info@growcraft.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+919999999999">+91 999 999 999</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>India</span>
+                    </div>
+                </div>
+                <div class="social-links fade-in">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom fade-in">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright mb-0 fade-in">
+                        © <span id="currentYear"></span> <strong>GrowCraft</strong>. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-nav fade-in">
+                        <a href="privacy.html">Privacy</a>
+                        <a href="terms.html">Terms</a>
+                        <a href="sitemap.html">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  <!-- Professional Footer ends -->
+
+  <script src="src/script.js"></script>
+  <script src="src/utils.js"></script>
+  <script src="src/darkMode.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const yearSpan = document.getElementById("currentYear");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+
+</html>
