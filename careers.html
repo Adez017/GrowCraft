@@ -21,7 +21,6 @@
       --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-      --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
       --card-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.12);
       --text-primary: #2d3748;
@@ -85,7 +84,7 @@
       font-weight: 600;
       color: #2e7d32 !important;
       font-family: "Poppins", sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.75rem;
       padding: 0.75rem 1.25rem !important;
       border-radius: 25px;
       display: flex;
@@ -336,42 +335,6 @@
       transform: scale(1.05);
     }
 
-    /* Dark Mode Theme Toggle Button Enhancement */
-    .dark-mode .theme-toggle,
-    .dark .theme-toggle {
-      background: rgba(255, 255, 255, 0.1) !important;
-      color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      border-radius: 50% !important;
-      padding: 10px !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .dark-mode .theme-toggle:hover,
-    .dark .theme-toggle:hover {
-      background: rgba(76, 175, 80, 0.2) !important;
-      border-color: #4caf50 !important;
-      color: #4caf50 !important;
-      transform: scale(1.1) !important;
-    }
-
-    /* Mobile Dark Mode Navbar */
-    @media (max-width: 991px) {
-      .dark-mode .navbar-collapse,
-      .dark .navbar-collapse {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-        border-radius: 15px !important;
-        margin-top: 15px !important;
-        padding: 20px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-      }
-
-      .dark-mode .search-container,
-      .dark .search-container {
-        background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 100%) !important;
-      }
-    }
-
     /* Responsive Design */
     @media (max-width: 768px) {
       .hero-title {
@@ -393,7 +356,7 @@
   </style>
 </head>
 
-<body id="main-body">
+<body data-theme="light">
   <!-- Navbar starts here -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid d-flex justify-content-between align-items-center px-2 px-sm-5">
@@ -552,112 +515,113 @@
   <footer class="professional-footer fade-in">
     <div class="container">
         <div class="row g-4 py-4 fade-in">
-            <!-- Footer Columns --><div class="col-lg-4 col-md-6 fade-in">
-                <div class="footer-brand fade-in">
-                    <img 
-                      src="images/Logo_new.png" 
-                      alt="GrowCraft Logo" 
-                      class="footer-logo mb-3 theme-aware-logo"
-                      data-light-src="images/Logo_new.png"
-                      data-dark-src="images/Logo.png" 
-                    />
-                    <h4 class="brand-name">GrowCraft</h4>
-                    <p class="brand-description">Empowering businesses with
-                        innovative digital solutions and creative excellence.</p>
-                    <div class="quick-stats fade-in">
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">150+</span>
-                            <span class="stat-label">Clients</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Years</span>
-                        </div>
-                    </div>
-                </div>
+          <!-- Footer Columns -->
+          <div class="col-lg-4 col-md-6 fade-in">
+            <div class="footer-brand fade-in">
+              <img 
+                src="images/Logo_new.png" 
+                alt="GrowCraft Logo" 
+                class="footer-logo mb-3 theme-aware-logo"
+                data-light-src="images/Logo_new.png"
+                data-dark-src="images/Logo.png" 
+              />
+              <h4 class="brand-name">GrowCraft</h4>
+              <p class="brand-description">Empowering businesses with
+                  innovative digital solutions and creative excellence.</p>
+              <div class="quick-stats fade-in">
+                  <div class="stat-item">
+                      <span class="stat-number">500+</span>
+                      <span class="stat-label">Projects</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="stat-number">150+</span>
+                      <span class="stat-label">Clients</span>
+                  </div>
+                  <div class="stat-item">
+                      <span class="stat-number">5+</span>
+                      <span class="stat-label">Years</span>
+                  </div>
+              </div>
             </div>
+          </div>
 
-            <!-- Services Section -->
-            <div class="col-lg-2 col-md-4 col-6">
-                <h5 class="footer-title">
-                    <i class="fas fa-tools" style="margin-right: 8px;"></i>Services
-                </h5>
-                <ul class="footer-links">
-                    <li><a href="learn/webdev.html">Web Development</a></li>
-                    <li><a href="learn/graphic.html">Graphic Design</a></li>
-                    <li><a href="src/digital-marketing.html">Digital Marketing</a></li>
-                    <li><a href="learn/contentwriting.html">Content Writing</a></li>
-                    <li><a href="learn/socialmedia.html">Social Media</a></li>
-                    <li><a href="learn/cyberanalyst.html">Cyber Analyst</a></li>
-                </ul>
-            </div>
+          <!-- Services Section -->
+          <div class="col-lg-2 col-md-4 col-6">
+            <h5 class="footer-title">
+              <i class="fas fa-tools" style="margin-right: 8px;"></i>Services
+            </h5>
+            <ul class="footer-links">
+              <li><a href="learn/webdev.html">Web Development</a></li>
+              <li><a href="learn/graphic.html">Graphic Design</a></li>
+              <li><a href="src/digital-marketing.html">Digital Marketing</a></li>
+              <li><a href="learn/contentwriting.html">Content Writing</a></li>
+              <li><a href="learn/socialmedia.html">Social Media</a></li>
+              <li><a href="learn/cyberanalyst.html">Cyber Analyst</a></li>
+            </ul>
+          </div>
 
-            <!-- Quick Links -->
-            <div class="col-lg-2 col-md-3 col-6 fade-in">
-                <h5 class="footer-title">Quick Links</h5>
-                <ul class="footer-links">
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="work.html">Portfolio</a></li>
-                    <li><a href="src/contact.html">Contact</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="blogListing.html">Blog</a></li>
-                </ul>
-            </div>
+          <!-- Quick Links -->
+          <div class="col-lg-2 col-md-3 col-6 fade-in">
+            <h5 class="footer-title">Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="work.html">Portfolio</a></li>
+              <li><a href="src/contact.html">Contact</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="blogListing.html">Blog</a></li>
+            </ul>
+          </div>
 
-            <!-- Contact -->
-            <div class="col-lg-4 col-md-6 fade-in">
-                <h5 class="footer-title">Get In Touch</h5>
-                <div class="contact-info mb-3 fade-in">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:info@growcraft.com">info@growcraft.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+919999999999">+91 999 999 999</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>India</span>
-                    </div>
-                </div>
-                <div class="social-links fade-in">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
+          <!-- Contact -->
+          <div class="col-lg-4 col-md-6 fade-in">
+            <h5 class="footer-title">Get In Touch</h5>
+            <div class="contact-info mb-3 fade-in">
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@growcraft.com">info@growcraft.com</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+919999999999">+91 999 999 999</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>India</span>
+              </div>
             </div>
+            <div class="social-links fade-in">
+              <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Footer Bottom -->
         <div class="footer-bottom fade-in">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="copyright mb-0 fade-in">
-                        © <span id="currentYear"></span> <strong>GrowCraft</strong>. All rights reserved.
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <div class="footer-nav fade-in">
-                        <a href="privacy.html">Privacy</a>
-                        <a href="terms.html">Terms</a>
-                        <a href="sitemap.html">Sitemap</a>
-                    </div>
-                </div>
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p class="copyright mb-0 fade-in">
+                © <span id="currentYear"></span> <strong>GrowCraft</strong>. All rights reserved.
+              </p>
             </div>
+            <div class="col-md-6">
+              <div class="footer-nav fade-in">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="sitemap.html">Sitemap</a>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
   </footer>
