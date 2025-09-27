@@ -727,202 +727,226 @@
             color: var(--text-secondary); 
         }
 
-        /* Process Flow Section */
-        .process-flow { 
-            padding: 80px 20px; 
-            background: var(--bg-primary); 
-            text-align: center; 
+        /* ===== Process Flow Section ===== */
+        .gc-process-section {
+            padding: clamp(60px, 8vw, 100px) 0;
+            background: var(--gc-bg);
         }
 
-        .timeline { 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 30px; 
-            padding: 20px 0; 
-            scroll-behavior: smooth; 
-            justify-content: center; 
+        .gc-process-timeline {
+            display: flex;
+            overflow-x: auto;
+            gap: 24px;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            justify-content: center;
+            margin-top: 48px;
         }
 
-        .timeline::-webkit-scrollbar {
+        .gc-process-timeline::-webkit-scrollbar {
             height: 8px;
         }
 
-        .timeline::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+        .gc-process-timeline::-webkit-scrollbar-track {
+            background: var(--gc-border);
             border-radius: 4px;
         }
 
-        .timeline::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
+        .gc-process-timeline::-webkit-scrollbar-thumb {
+            background: var(--gc-primary-1);
             border-radius: 4px;
         }
 
-        .step { 
-            min-width: 280px; 
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 12px var(--shadow-light); 
-            position: relative; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        .gc-process-step {
+            min-width: 280px;
+            background: var(--gc-glass);
+            padding: 32px;
+            border-radius: var(--gc-radius);
+            box-shadow: var(--gc-shadow);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--gc-border);
+            backdrop-filter: blur(12px);
         }
 
-        .step:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 6px 18px var(--shadow-medium); 
+        .gc-process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(14,165,233,0.15);
         }
 
-        .step::before { 
-            content: attr(data-step); 
-            position: absolute; 
-            top: -15px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: var(--accent-color); 
-            color: var(--bg-primary); 
-            font-weight: bold; 
-            font-size: 1rem; 
-            width: 40px; 
-            height: 40px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            border-radius: 50%; 
-            box-shadow: 0 2px 8px var(--shadow-light); 
+        .gc-process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--gc-primary-1), var(--gc-primary-2));
+            color: white;
+            font-weight: 800;
+            font-size: 16px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(14,165,233,0.25);
         }
 
-        .step h3 { 
-            margin-top: 15px; 
-            font-size: 1.3rem; 
-            font-weight: 600; 
-            color: var(--text-primary); 
+        .gc-process-step h3 {
+            margin-top: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gc-fg);
+            margin-bottom: 12px;
         }
 
-        .step p { 
-            font-size: 0.95rem; 
-            color: var(--text-secondary); 
-            line-height: 1.5; 
+        .gc-process-step p {
+            font-size: 15px;
+            color: var(--gc-muted);
+            line-height: 1.5;
+            margin: 0;
         }
 
-        /* Case Study Section */
-        .case-study-section { 
-            padding: 80px 20px; 
-            background: var(--section-bg-alt); 
+        /* ===== Case Studies Section ===== */
+        .gc-case-studies {
+            padding: clamp(60px, 8vw, 100px) 0;
+            background: var(--gc-bg-2);
         }
 
-        .case-study-cards { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
-            text-align: center; 
+        .gc-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
         }
 
-        .case-card { 
-            background: var(--card-bg); 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 20px var(--shadow-light); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-            border: 1px solid var(--border-color); 
+        .gc-case-card {
+            background: var(--gc-glass);
+            padding: 32px;
+            border-radius: var(--gc-radius);
+            box-shadow: var(--gc-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--gc-border);
+            backdrop-filter: blur(12px);
+            text-align: center;
         }
 
-        .case-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 8px 25px var(--shadow-medium); 
+        .gc-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(14,165,233,0.15);
         }
 
-        .case-card h3 { 
-            font-size: 1.5rem; 
-            font-weight: 600; 
-            margin-bottom: 10px; 
-            color: var(--text-primary); 
+        .gc-case-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--gc-fg);
         }
 
-        .case-card p { 
-            color: var(--text-secondary); 
-            font-size: 1rem; 
-            margin-bottom: 20px; 
+        .gc-case-card p {
+            color: var(--gc-muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
-        .progress-bar { 
-            height: 8px; 
-            background: var(--border-color); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            margin-bottom: 10px; 
+        .gc-progress-bar {
+            height: 8px;
+            background: var(--gc-border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            position: relative;
         }
 
-        .progress-fill { 
-            height: 100%; 
-            width: 0; 
-            background: linear-gradient(90deg, var(--accent-color), #00bcd4); 
-            transition: width 1.5s ease; 
+        .gc-progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--gc-primary-1), var(--gc-primary-2));
+            transition: width 1.5s ease;
+            border-radius: 20px;
         }
 
-        .result-text { 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            color: var(--text-primary); 
+        .gc-result-text {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--gc-primary-1);
+            margin: 0;
         }
 
-        /* CTA Section */
-        .cta-section { 
-            background: var(--bg-tertiary); 
-            text-align: center; 
-            padding: 3rem 1rem; 
-            border-radius: 16px; 
-            margin: 2rem 0; 
+        /* ===== CTA Section ===== */
+        .gc-cta-section {
+            background: var(--gc-glass);
+            border: 1px solid var(--gc-border);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            padding: clamp(48px, 6vw, 64px);
+            border-radius: var(--gc-radius);
+            margin: clamp(32px, 4vw, 48px) 0;
+            box-shadow: var(--gc-shadow);
         }
 
-        .cta-section h2 { 
-            font-size: 2rem; 
-            margin-bottom: 0.5rem; 
-            color: var(--text-primary); 
+        .gc-cta-section h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 16px;
+            color: var(--gc-fg);
+            font-weight: 800;
         }
 
-        .cta-section p { 
-            font-size: 1rem; 
-            color: var(--text-secondary); 
-            margin-bottom: 1.5rem; 
+        .gc-cta-section p {
+            font-size: clamp(16px, 1.5vw, 18px);
+            color: var(--gc-muted);
+            margin-bottom: 32px;
+            max-width: 60ch;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-button { 
-            display: flex; 
-            gap: 1rem; 
-            justify-content: center; 
+        .gc-cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .btn-primary { 
-            background: var(--accent-color); 
-            color: var(--bg-primary); 
-            padding: 0.8rem 1.5rem; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            transition: 0.3s; 
+        .gc-btn-cta-primary {
+            background: linear-gradient(90deg, var(--gc-primary-1), var(--gc-primary-2));
+            color: white;
+            padding: 16px 32px;
+            border-radius: var(--gc-radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
             border: none;
-            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(14,165,233,.25);
         }
 
-        .btn-primary:hover { 
-            background: var(--accent-hover); 
-            transform: scale(1.05); 
-            color: var(--bg-primary);
+        .gc-btn-cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(14,165,233,.35);
+            color: white;
+            text-decoration: none;
         }
 
-        .btn-secondary { 
-            border: 2px solid var(--accent-color); 
-            padding: 0.8rem 1.5rem; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            color: var(--accent-color); 
-            transition: 0.3s; 
+        .gc-btn-cta-secondary {
+            border: 2px solid var(--gc-primary-1);
+            color: var(--gc-primary-1);
             background: transparent;
+            padding: 14px 30px;
+            border-radius: var(--gc-radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 16px;
         }
 
-        .btn-secondary:hover { 
-            background: var(--accent-color); 
-            color: var(--bg-primary); 
+        .gc-btn-cta-secondary:hover {
+            background: var(--gc-primary-1);
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
         }
 
         /* Navbar Styles */
@@ -941,39 +965,49 @@
             color: var(--accent-color) !important;
         }
 
-        /* Footer Styles */
-        .footer {
-            background-color: var(--bg-tertiary) !important;
-            color: var(--text-primary) !important;
-            border-top: 1px solid var(--border-color);
+        /* ===== Footer Styles ===== */
+        .gc-footer {
+            background: var(--gc-bg-2) !important;
+            color: var(--gc-fg) !important;
+            border-top: 1px solid var(--gc-border);
         }
 
-        .footer h5 {
-            color: var(--text-primary) !important;
+        .gc-footer h5 {
+            color: var(--gc-fg) !important;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .footer p,
-        .footer li {
-            color: var(--text-secondary) !important;
+        .gc-footer p,
+        .gc-footer li {
+            color: var(--gc-muted) !important;
         }
 
-        .footer a {
-            color: var(--text-secondary) !important;
+        .gc-footer a {
+            color: var(--gc-muted) !important;
             transition: color 0.3s ease;
+            text-decoration: none;
         }
 
-        .footer a:hover {
-            color: var(--accent-color) !important;
+        .gc-footer a:hover {
+            color: var(--gc-primary-1) !important;
         }
 
-        .footer .btn-outline-light {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
+        .gc-footer .btn-outline-light {
+            border-color: var(--gc-primary-1);
+            color: var(--gc-primary-1);
+            font-weight: 600;
         }
 
-        .footer .btn-outline-light:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-primary);
+        .gc-footer .btn-outline-light:hover {
+            background-color: var(--gc-primary-1);
+            color: white;
+        }
+
+        .gc-footer-bottom {
+            background-color: var(--gc-bg) !important;
+            color: var(--gc-muted) !important;
+            border-top: 1px solid var(--gc-border);
         }
 
         /* Back to Top Button */
@@ -1265,62 +1299,95 @@
         </div>
     </section>
 
-    <section class="benefits-alt-section">
-        <div class="container">
-            <h2 class="section-title">Why Partner with Us for Digital Marketing?</h2>
-            <p class="section-subtitle">Our strategic approach, data expertise, and commitment to results ensure your marketing budget works harder for your business.</p>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Measurable ROI</h3>
-                    <p>Every campaign is tracked with clear metrics, so you can see the direct impact on your business growth.</p>
+    <!-- ===== Benefits Section ===== -->
+    <section class="gc-section gc-section-alt">
+        <div class="gc-container">
+            <div class="gc-section-head">
+                <div class="gc-eyebrow-section">GrowCraft · Benefits</div>
+                <h2 class="gc-title">Why Partner with Us for <span class="gc-title-gradient">Digital Marketing?</span></h2>
+                <p class="gc-lead">Our strategic approach, data expertise, and commitment to results ensure your marketing budget works harder for your business.</p>
+            </div>
+            <div class="gc-cards-grid">
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="gc-card-title">Measurable ROI</h3>
+                        <p class="gc-card-desc">Every campaign is tracked with clear metrics, so you can see the direct impact on your business growth.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-bullseye"></i></div>
-                    <h3>Targeted Audience Reach</h3>
-                    <p>We identify and engage your ideal customers with precision, minimizing wasted ad spend.</p>
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="gc-card-title">Targeted Audience Reach</h3>
+                        <p class="gc-card-desc">We identify and engage your ideal customers with precision, minimizing wasted ad spend.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-eye"></i></div>
-                    <h3>Enhanced Brand Visibility</h3>
-                    <p>We increase your brand's presence across all major online channels, making you stand out from competitors.</p>
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="gc-card-title">Enhanced Brand Visibility</h3>
+                        <p class="gc-card-desc">We increase your brand's presence across all major online channels, making you stand out from competitors.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Innovative Strategies</h3>
-                    <p>We stay ahead of industry trends, using the latest tools and techniques to give you a competitive edge.</p>
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="gc-card-title">Innovative Strategies</h3>
+                        <p class="gc-card-desc">We stay ahead of industry trends, using the latest tools and techniques to give you a competitive edge.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Dedicated Support</h3>
-                    <p>Our team works closely with you to understand your goals and deliver a personalized, responsive service.</p>
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="gc-card-title">Dedicated Support</h3>
+                        <p class="gc-card-desc">Our team works closely with you to understand your goals and deliver a personalized, responsive service.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon"><i class="fas fa-database"></i></div>
-                    <h3>Data-Driven Decisions</h3>
-                    <p>We rely on analytics, not guesswork, to optimize campaigns and ensure every action is strategic.</p>
+                <div class="gc-card">
+                    <div class="gc-card-inner">
+                        <div class="gc-card-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="gc-card-title">Data-Driven Decisions</h3>
+                        <p class="gc-card-desc">We rely on analytics, not guesswork, to optimize campaigns and ensure every action is strategic.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="process-flow">
-        <div class="container">
-            <h2 class="section-title">Our Digital Marketing Process</h2>
-            <div class="timeline">
-                <div class="step" data-step="1">
+    <!-- ===== Process Flow Section ===== -->
+    <section class="gc-process-section">
+        <div class="gc-container">
+            <div class="gc-section-head">
+                <div class="gc-eyebrow-section">GrowCraft · Process</div>
+                <h2 class="gc-title">Our Digital <span class="gc-title-gradient">Marketing Process</span></h2>
+                <p class="gc-lead">A systematic approach to delivering exceptional results for your digital marketing campaigns.</p>
+            </div>
+            <div class="gc-process-timeline">
+                <div class="gc-process-step" data-step="1">
                     <h3>Strategy & Planning</h3>
                     <p>We begin with a deep dive into your business, competitors, and target audience to build a roadmap.</p>
                 </div>
-                <div class="step" data-step="2">
+                <div class="gc-process-step" data-step="2">
                     <h3>Campaign Creation</h3>
                     <p>We develop compelling content, design eye-catching visuals, and set up your campaigns across platforms.</p>
                 </div>
-                <div class="step" data-step="3">
+                <div class="gc-process-step" data-step="3">
                     <h3>Launch & Management</h3>
                     <p>We launch your campaigns and actively monitor performance, making real-time optimizations.</p>
                 </div>
-                <div class="step" data-step="4">
+                <div class="gc-process-step" data-step="4">
                     <h3>Analysis & Reporting</h3>
                     <p>We provide detailed performance reports, highlighting key insights and a clear path forward.</p>
                 </div>
@@ -1328,56 +1395,59 @@
         </div>
     </section>
 
-    <section class="case-study-section">
-        <div class="container">
-            <div class="case-study-header">
-                <h2 class="section-title">Case Studies & Results</h2>
-                <p class="section-subtitle">Explore how our digital marketing strategies have driven significant growth for our clients.</p>
+    <!-- ===== Case Studies Section ===== -->
+    <section class="gc-case-studies">
+        <div class="gc-container">
+            <div class="gc-section-head">
+                <div class="gc-eyebrow-section">GrowCraft · Results</div>
+                <h2 class="gc-title">Case Studies & <span class="gc-title-gradient">Results</span></h2>
+                <p class="gc-lead">Explore how our digital marketing strategies have driven significant growth for our clients.</p>
             </div>
-            <div class="case-study-cards">
-                <div class="case-card" data-result="80%">
+            <div class="gc-case-grid">
+                <div class="gc-case-card" data-result="80%">
                     <h3>Organic Traffic Growth</h3>
                     <p>A comprehensive SEO strategy that increased organic search traffic and qualified leads by 80% in six months.</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                    <div class="gc-progress-bar">
+                        <div class="gc-progress-fill"></div>
                     </div>
-                    <span class="result-text"></span>
+                    <p class="gc-result-text"></p>
                 </div>
-                <div class="case-card" data-result="150%">
+                <div class="gc-case-card" data-result="150%">
                     <h3>Social Media Engagement</h3>
                     <p>Creative social media campaigns that boosted brand visibility and significantly increased audience engagement by 150%.</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                    <div class="gc-progress-bar">
+                        <div class="gc-progress-fill"></div>
                     </div>
-                    <span class="result-text"></span>
+                    <p class="gc-result-text"></p>
                 </div>
-                <div class="case-card" data-result="60%">
+                <div class="gc-case-card" data-result="60%">
                     <h3>PPC Conversion Rate</h3>
                     <p>Optimized paid advertising campaigns that lowered cost-per-click and increased conversion rates by 60%.</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                    <div class="gc-progress-bar">
+                        <div class="gc-progress-fill"></div>
                     </div>
-                    <span class="result-text"></span>
+                    <p class="gc-result-text"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Accelerate Your Online Presence?</h2>
+    <!-- ===== CTA Section ===== -->
+    <section class="gc-section">
+        <div class="gc-container">
+            <div class="gc-cta-section">
+                <h2>Ready to Accelerate Your <span class="gc-gradient">Online Presence?</span></h2>
                 <p>Partner with us to create a digital marketing strategy that delivers real, tangible results for your business.</p>
-                <div class="cta-button">
-                    <a href="#contact" class="btn-primary">🚀 Get a Free Proposal</a>
-                    <a href="#portfolio" class="btn-secondary">See Our Work</a>
+                <div class="gc-cta-buttons">
+                    <a href="#contact" class="gc-btn-cta-primary">🚀 Get a Free Proposal</a>
+                    <a href="#portfolio" class="gc-btn-cta-secondary">See Our Work</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer section starts here (Contact us) -->
-    <footer class="footer py-5">
+    <footer class="gc-footer py-5")>
         <div class="container">
             <div class="row gy-4">
                 <div class="col-md-3">
@@ -1422,7 +1492,7 @@
             </div>
         </div>
     </footer>
-    <div class="text-center py-3" style="background-color: var(--bg-tertiary); color: var(--text-secondary); border-top: 1px solid var(--border-color);">
+    <div class="text-center py-3 gc-footer-bottom" style="background-color: var(--bg-tertiary); color: var(--text-secondary); border-top: 1px solid var(--border-color);">
         &copy; 2025 <strong>GrowCraft</strong>. All Rights Reserved.
     </div>
     <button id="backToTop" title="Go to top"
@@ -1585,7 +1655,7 @@
             });
             
             // Timeline auto-scroll
-            const timeline = document.querySelector(".timeline");
+            const timeline = document.querySelector(".gc-process-timeline");
             if (timeline) {
                 let scrollAmount = 0;
                 const interval = setInterval(() => {
@@ -1593,20 +1663,21 @@
                         timeline.scrollTo({ left: 0, behavior: "smooth" });
                         scrollAmount = 0;
                     } else {
-                        scrollAmount += 280;
+                        scrollAmount += 304; // 280px card + 24px gap
                         timeline.scrollTo({ left: scrollAmount, behavior: "smooth" });
                     }
                 }, 4000);
                 
                 // Stop auto-scroll on user interaction
                 timeline.addEventListener('mouseenter', () => clearInterval(interval));
+                timeline.addEventListener('touchstart', () => clearInterval(interval));
             }
 
             // Case study progress bars
-            const caseCards = document.querySelectorAll(".case-card");
+            const caseCards = document.querySelectorAll(".gc-case-card");
             caseCards.forEach(card => {
-                const fill = card.querySelector(".progress-fill");
-                const resultText = card.querySelector(".result-text");
+                const fill = card.querySelector(".gc-progress-fill");
+                const resultText = card.querySelector(".gc-result-text");
                 const resultValue = card.getAttribute("data-result");
 
                 const observer = new IntersectionObserver(entries => {
@@ -1620,6 +1691,21 @@
                 }, { threshold: 0.4 });
 
                 observer.observe(card);
+            });
+
+            // Card reveal animation
+            const cards = document.querySelectorAll('.gc-card');
+            const cardObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        cardObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            cards.forEach(card => {
+                cardObserver.observe(card);
             });
         });
     </script>
